@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "segovhelp",
+    "slug": "segovhelp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
