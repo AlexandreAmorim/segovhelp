@@ -5,6 +5,17 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "plugins": [
+      "@react-native-firebase/app"
+    ],
+    "android": {
+      "package": "com.segovhelp",
+      "googleServicesFile": "./google-services.json"
+    },
+    "ios": {
+      "bundleIdentifier": "com.segovhelp",
+      "googleServicesFile": "./GoogleService-Info.plist"
+    }
   }
 }

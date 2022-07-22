@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "903566583344",
+    "project_id": "segovhelp",
+    "storage_bucket": "segovhelp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903566583344:android:83c21a0f1f57a48935eff5",
+        "android_client_info": {
+          "package_name": "com.segovhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903566583344-5bdvsfj6m4h099k61k8e8le4kvbrajin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyaAVk9-ENOcxrXQGdAjVEQ5yIJOzT9Zs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903566583344-5bdvsfj6m4h099k61k8e8le4kvbrajin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
