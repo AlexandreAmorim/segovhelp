@@ -11,54 +11,55 @@ import {
     Center
 } from 'native-base';
 import { SignOut, Alien, ChatTeardropText } from 'phosphor-react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../components/Button';
 import { Filter } from '../components/Filter';
 import { Order, OrderProps } from '../components/Order';
 import { Alert } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 export function Home() {
     const navigation = useNavigation();
     const { colors } = useTheme();
     const [selected, setSelected] = useState<'open' | 'closed'>('open');
-    const [orders, setOrders] = useState<OrderProps[]>([
-        {
-            id: '123',
-            patrimony: '123456',
-            when: '19/07/2022 às 10:00',
-            status: 'open'
-        },
-        {
-            id: '124',
-            patrimony: '123456',
-            when: '19/07/2022 às 10:00',
-            status: 'open'
-        },
-        {
-            id: '125',
-            patrimony: '123456',
-            when: '19/07/2022 às 10:00',
-            status: 'closed'
-        },
-        {
-            id: '126',
-            patrimony: '123456',
-            when: '19/07/2022 às 10:00',
-            status: 'closed'
-        },
-        {
-            id: '127',
-            patrimony: '123456',
-            when: '19/07/2022 às 10:00',
-            status: 'open'
-        },
-        {
-            id: '128',
-            patrimony: '123456',
-            when: '19/07/2022 às 10:00',
-            status: 'open'
-        }
-    ]);
+    const [orders, setOrders] = useState<OrderProps[]>([]);
+
+    /* unica leitura
+    useEffect(() => {
+        firestore()
+            .collection('calleds')
+            .get()
+            .then(response => {
+                const data = response.docs.map(doc => {
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                }) as OrderProps[];
+
+                setOrders(data);
+            })
+            .catch(error => console.error(error));
+    }, []);
+    */
+
+    useEffect(() => {
+        const subscribe = firestore()
+            .collection('calleds')
+            .where('status', '==', selected)
+            .onSnapshot(querySnapshot => {
+                const data = querySnapshot.docs.map((doc) => {
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                }) as OrderProps[];
+
+                setOrders(data)
+            });
+
+        return () => subscribe();
+    }, [selected]);
 
     function handleNewOrder() {
         navigation.navigate('new');
@@ -93,7 +94,13 @@ export function Home() {
                 />
             </HStack>
             <VStack flex={1} px={6}>
-                <HStack w="full" mt={8} mb={4} justifyContent="space-between" alignItems="center">
+                <HStack
+                    w="full"
+                    mt={8}
+                    mb={4}
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
                     <Heading color="gray.100">
                         Solicitações
                     </Heading>
